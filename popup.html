@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<title>ABU</title>
+	<style>
+		body{
+			margin:0;
+			min-width:400px;
+			height:1px;
+		}
+		
+		#current-page{
+			text-align:center;
+			font-size:1rem;
+		}
+		
+		button{
+			box-sizing:default;
+			font-size:1rem;
+			white-space:nowrap;
+			border:1px #fff solid;
+			padding:.5rem;
+			color:white;
+			font-weight:bold;
+			cursor:pointer;
+			background-color:#5e79ce;
+			width:100%;
+			text-align:left;
+			box-shadow:1px 1px 1px white inset,-1px -1px 1px black inset;
+		}
+		
+		button:hover{
+			box-shadow:0 0 100rem 0 rgba(0,0,0,.25) inset;
+		}
+		
+		button:active{
+			box-shadow:1px 1px 1px black inset,-1px -1px 1px white inset,0 0 100rem 0 rgba(0,0,0,.5) inset;
+		}
+		
+		#notification{
+			margin:.5rem;
+		}
+		
+		#onlyNewABU{
+			color:rgb(97,153,25);
+			cursor:pointer;
+		}
+		
+		#onlyNewABU:hover{
+			text-decoration:underline;
+			color:rgb(72,118,0);
+		}
+		
+		#abu-anywhere>button>img{
+			height:16px;
+			width:16px;
+		}
+		
+		#credits{
+			text-align:center;
+			margin:.25rem;
+		}
+		
+		.overwrite{
+			background-color:yellow;
+		}
+		
+		#credits{
+			display:flex;
+			justify-content:space-between;
+		}
+		
+		#update{
+			text-align:center;
+			font-weight:bold;
+		}
+	</style>
+	</head>
+	<body id="ABUSETUP">
+		<button id="current-page"></button>
+		<p id="notification"></p>
+		<hr>
+		<div id="abu-anywhere"></div>
+		<small id="credits"><a id="email" href="mailto:joshuapowlison@gmail.com">Get support at joshuapowlison@gmail.com</a> <a id="website" href="joshpowlison.com">joshpowlison.com</a></small>
+	</body>
+	<script src="script.js"></script>
+</html>
