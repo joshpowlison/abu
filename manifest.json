@@ -2,7 +2,7 @@
 	"manifest_version": 2
 	,"name":"ABU (Automatic Bookmark Updater)"
 	,"short_name":"ABU"
-	,"version":"1.3"
+	,"version":"1.4"
 	,"description":"Update site bookmarks to your current page automatically. Great for webcomics, wikis, blogs, and YouTube!"
 	,"author":"Josh Powlison"
 	

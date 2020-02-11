@@ -1,16 +1,16 @@
 //Icons
-const activeIcons={"128":"icons/128blue.png"};
-const inactiveIcons={"128":"icons/128gray.png"};
-const ABUVersion=1.3;
+const activeIcons	= {"128":"icons/128blue.png"};
+const inactiveIcons	= {"128":"icons/128gray.png"};
+const ABUVersion	= 1.4;
 
 //Call the variables here
-var url="";
-var domain="";
-var title="";
-var favIconUrl="";
+var url				= "";
+var domain			= "";
+var title			= "";
+var favIconUrl		= "";
 
 //Warn about home page ABUkmarks going everywhere if they're on the home page		
-warning="";
+warning				= "";
 
 console.log('May get an error: Unchecked runtime.lastError: The tab was closed. The code should keep running, but there\'s no way to check for if a tab exists; only to hide the error. I opted for just letting it be. :P');
 
@@ -50,6 +50,9 @@ function getWebpage(input,title,storage){
 	
 	//LEZHIM// lezhin.com/language/comic/title
 	if(!keywordCheck) keywordCheck=/lezhin.com\/[^/]+\/comic\/[^/]+\//.exec(input);
+	
+	//MANGAHUB.IO// mangahub.com/chapter/title
+	if(!keywordCheck) keywordCheck=/mangahub.io\/chapter\/[^/]+\//.exec(input);
 	
 	if(keywordCheck) output=keywordCheck[0];
 	
@@ -246,16 +249,30 @@ function createPage(){
 	chrome.storage.sync.get(function(storage){
 		//ABUVersion info
 		if(!storage["ABUVersion"] || storage["ABUVersion"]<ABUVersion){
-			document.getElementsByTagName("BODY")[0].insertAdjacentHTML("afterbegin","<p id='update'>ABU 1.3 adds support for saving your spot in YouTube videos (doesn't work for the minified player or if the video's playing in an unfocused tab) and Google Slides presentations!</p>");
+			document.getElementsByTagName("BODY")[0].insertAdjacentHTML("afterbegin","<p id='update'>ABU 1.4 adds support for mangahub.io. Always feel free to let me know if ABU doesn't work on any website!</p>");
 			chrome.storage.sync.set({"ABUVersion":ABUVersion});
 		}
 		
 		mainButton.dataset.multiple=0;
 		//console.log(domain,domain.substr(0,domain.length-2).indexOf("/")==-1);
 		
+		console.log('url is',url);
+		
 		//If we're on the homepage, warn the user that subpages are better
-		if(domain.indexOf("/")!==-1 && domain.substr(0,domain.length-2).indexOf("/")==-1 && !/(page|p|date)=/i.test(url) && !/tapas.io\/(series|episode)\//.test(url)){
-			if(warning.indexOf("a subpage if")===-1) warning+="ABUkmark a subpage if possible so visiting about, archives, links, etc doesn't update bookmarks. Just click on an article or back button and it should be perfect!<br>";
+		if(
+			// If all of these are true, the user's on a homepage
+			(
+				domain.indexOf("/")!==-1
+				&& domain.substr(0,domain.length-2).indexOf("/")==-1
+				&& !/(page|p|date)=/i.test(url)
+				&& !/tapas.io\/(series|episode)\//.test(url)
+			)
+			// If any of these are true, the user's on a homepage
+			|| (
+				/mangahub.io\/manga\//.test(url)
+			)
+		){
+			if(warning.indexOf("a subpage if")===-1) warning+="ABUkmark a subpage if possible so visiting about, archives, links, etc doesn't update bookmarks. Just click on an article, a back button, or a button to start reading and it should be perfect!<br>";
 		}
 		
 		anywhereButtons="";
